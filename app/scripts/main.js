@@ -44,19 +44,15 @@ function printWordOrNumberAccordingDivs(num, div1, div2) {
 }
 
 $(function() {
-    var initNum = 1,
-        endNum = 5,
-        num = initNum,
-        div1 = 2,
-        div2 = 5,
-        timeout = 1000;
+    $.getJSON("../configuration.json", function(config) {
+        var num = config.initNum;
+        var interval = setInterval(function () {
+            printWordOrNumberAccordingDivs(num++, config.div1, config.div2);
+            playSound('tick');
+        }, config.timeout);
 
-    var interval = setInterval(function () {
-        printWordOrNumberAccordingDivs(num++, div1, div2);
-        playSound('tick');
-    }, timeout);
-
-    setTimeout(function () {
-        clearInterval(interval);
-    }, (endNum * timeout) + 1);
+        setTimeout(function () {
+            clearInterval(interval);
+        }, ((config.endNum - config.initNum) * config.timeout) + 1);
+    });
 });

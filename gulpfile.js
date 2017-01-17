@@ -86,14 +86,15 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
-  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts', 'audios'], () => {
+  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
       server: {
         baseDir: ['.tmp', 'app'],
         routes: {
-          '/bower_components': 'bower_components'
+          '/bower_components': 'bower_components',
+          '/node_modules': 'node_modules'
         }
       }
     });
