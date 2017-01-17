@@ -104,7 +104,8 @@ gulp.task('serve', () => {
       'app/images/**/*',
       'app/audios/**/*',
       '.tmp/fonts/**/*',
-      'app/configuration.json'
+      'app/configuration.js',
+      'app/utils.js'
     ]).on('change', reload);
 
     gulp.watch('app/styles/**/*.scss', ['styles']);

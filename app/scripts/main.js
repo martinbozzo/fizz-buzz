@@ -1,58 +1,25 @@
-/**
- * playSound: Plays Fizz, Buzz, FizzBuzz or Tick Sound on number change
- * @param {('fizz'|'buzz'|'fizzbuzz'|'tick')} word
- */
-function playSound(word) {
-    if (typeof word === 'string') {
-        var snd = new Audio("/audios/" + word + ".mp3");
-        snd.play();
-    }
-}
-
-/**
- * isMultipleOf: will evaluate to true if num is divisible by divNum
- * @param {int} num
- * @param {int} divNum
- */
-function isMultipleOf(num, divNum) {
-    return num % divNum === 0;
-}
-
-/**
- * printWordOrNumberAccordingDivs: will print
- *     "Fizz" if num is multiple of div1
- *     "Buzz" if num is multiple of div2
- *     "FizzBuzz" if num is multiple of div1 and div2
- *     num else
- * @param {int} num
- * @param {int} div1
- * @param {int} div2
- */
-function printWordOrNumberAccordingDivs(num, div1, div2) {
-    var word = num;
-
-    if (isMultipleOf(num, div2) && isMultipleOf(num, div1)) {
-        word = 'fizzbuzz';
-    } else if (isMultipleOf(num, div1)) {
-        word = 'fizz';
-    } else if (isMultipleOf(num, div2)) {
-        word = 'buzz';
-    }
-
-    $('.number').html(word);
-    playSound(word);
-}
-
 $(function() {
-    $.getJSON("../configuration.json", function(config) {
-        var num = config.initNum;
-        var interval = setInterval(function () {
-            printWordOrNumberAccordingDivs(num++, config.div1, config.div2);
-            playSound('tick');
-        }, config.timeout);
+    var utils = window.Utils,
+        config = window.Configuration;
 
-        setTimeout(function () {
-            clearInterval(interval);
-        }, (config.endNum - config.initNum + 1) * config.timeout);
+    utils.initCounting(config);
+
+    $('.btn-submit').click(function() {
+        var newConfig = {
+            initNum: $('#initNum').val(),
+            div1: $('#div1').val(),
+            div2: $('#div2').val(),
+            timeout: $('#timeout').val()
+        };
+
+        utils.resetCounting(newConfig);
+    });
+
+    $('.btn-stop').click(function() {
+        utils.stopCounting();
+    });
+
+    $('.settings-icon').click(function() {
+        utils.toggleSettings();
     });
 });
