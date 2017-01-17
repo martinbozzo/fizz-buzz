@@ -1,9 +1,12 @@
 /**
+ * playSound: Plays Fizz, Buzz, FizzBuzz or Tick Sound on number change
  * @param {('fizz'|'buzz'|'fizzbuzz'|'tick')} word
  */
 function playSound(word) {
-    var snd = new Audio("/audios/" + word + ".mp3");
-    snd.play();
+    if (typeof word === 'string') {
+        var snd = new Audio("/audios/" + word + ".mp3");
+        snd.play();
+    }
 }
 
 /**
@@ -34,16 +37,15 @@ function printWordOrNumberAccordingDivs(num, divs) {
     } else if (isMultipleOf(num, 5)) {
         word = 'buzz';
     }
-
-    playSound(word);
-
+    
     $('.number').html(word);
+    playSound(word);
 }
 
 $(function() {
     var num = 1,
         divs = [3, 5],
-        timeout = 1500;
+        timeout = 1200;
 
     var interval = setInterval(function () {
         printWordOrNumberAccordingDivs(num++, divs);
