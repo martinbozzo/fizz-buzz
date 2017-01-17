@@ -86,7 +86,7 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
-  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts'], () => {
+  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts', 'audios'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
@@ -101,6 +101,7 @@ gulp.task('serve', () => {
     gulp.watch([
       'app/*.html',
       'app/images/**/*',
+      'app/audios/**/*',
       '.tmp/fonts/**/*'
     ]).on('change', reload);
 
