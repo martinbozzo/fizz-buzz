@@ -1,7 +1,7 @@
 {
-    "initNum": 10,
-    "endNum": 20,
-    "div1": 5,
-    "div2": 5,
+    "initNum": 1,
+    "endNum": 10,
+    "div1": 2,
+    "div2": 3,
     "timeout": 1000
 }

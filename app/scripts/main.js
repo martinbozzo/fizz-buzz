@@ -53,5 +53,6 @@ $(function() {
 
         setTimeout(function () {
             clearInterval(interval);
+        }, (config.endNum - config.initNum + 1) * config.timeout);
     });
 });
