@@ -20,39 +20,43 @@ function isMultipleOf(num, divNum) {
 
 /**
  * printWordOrNumberAccordingDivs: will print
- *     "Fizz" if num is multiple of 3
- *     "Buzz" if num is multiple of 5
- *     "FizzBuzz" if num is multiple of 3 and 5
+ *     "Fizz" if num is multiple of div1
+ *     "Buzz" if num is multiple of div2
+ *     "FizzBuzz" if num is multiple of div1 and div2
  *     num else
  * @param {int} num
- * @param {array} divs
+ * @param {int} div1
+ * @param {int} div2
  */
-function printWordOrNumberAccordingDivs(num, divs) {
+function printWordOrNumberAccordingDivs(num, div1, div2) {
     var word = num;
 
-    if (isMultipleOf(num, 5) && isMultipleOf(num, 3)) {
+    if (isMultipleOf(num, div2) && isMultipleOf(num, div1)) {
         word = 'fizzbuzz';
-    } else if (isMultipleOf(num, 3)) {
+    } else if (isMultipleOf(num, div1)) {
         word = 'fizz';
-    } else if (isMultipleOf(num, 5)) {
+    } else if (isMultipleOf(num, div2)) {
         word = 'buzz';
     }
-    
+
     $('.number').html(word);
     playSound(word);
 }
 
 $(function() {
-    var num = 1,
-        divs = [3, 5],
-        timeout = 1200;
+    var initNum = 1,
+        endNum = 5,
+        num = initNum,
+        div1 = 2,
+        div2 = 5,
+        timeout = 1000;
 
     var interval = setInterval(function () {
-        printWordOrNumberAccordingDivs(num++, divs);
+        printWordOrNumberAccordingDivs(num++, div1, div2);
         playSound('tick');
     }, timeout);
 
     setTimeout(function () {
         clearInterval(interval);
-    }, 100 * timeout);
+    }, (endNum * timeout) + 1);
 });
